@@ -1,10 +1,7 @@
-# Criar jogo cookie clicker
-# Criar interface e dados
-
 import tkinter as tk
 from tkinter import messagebox
 
-# variáveis globais
+# global variables
 codes = 0
 codes_per_click = 1
 
@@ -13,12 +10,12 @@ cost_rtfm = 10.0
 
 cps = 0
 cost_cps = 100.0
-cps_update = 1000 # inicia 1 segundo de delay
+cps_update = 1000 # starts 1 second delay
 
 server = 0
 cost_server = 1000
 
-# criar janela
+# create window
 window = tk.Tk()
 window.title('Code Clicker')
 window.iconbitmap('_internal/assets/icon.ico')
@@ -26,17 +23,17 @@ window.config(background='#292b38')
 window.resizable(False, False)
 #window.grid_rowconfigure(1, minsize=100)
 
-# tamanho janela
+# window size
 window_width = 1000
 window_height = 800
 
-# obter informações do monitor e centralizar janela
+# get monitor information and center window
 window_x = window.winfo_screenwidth()
 window_y = window.winfo_screenheight()
 x = (window_x - window_width) // 2
 y = (window_y - window_height) // 2
 
-# calcular posição
+# calculate position
 window.geometry(f'{window_width}x{window_height}+{x}+{y}')
 
 # update codes per second(cps)
@@ -46,13 +43,13 @@ def update():
     update_label()
     window.after(cps_update, update)
 
-# adicionar cookie
+# add code
 def generate_code():
     global codes, codes_per_click
     codes += codes_per_click
     update_label()
 
-# gerenciar vovós
+# add RTFM
 def buy_RTFM():
     global codes, codes_per_click, rtfm, cost_rtfm
     if codes >= cost_rtfm:
@@ -71,7 +68,7 @@ def buy_RTFM():
         )
         update_label()
 
-# comprar robos
+# add robot
 def buy_CPS():
     global cps, codes, cost_cps
     if codes >= cost_cps:
@@ -89,7 +86,7 @@ def buy_CPS():
         )
         update_label()
 
-# comprar servidor
+# add server
 def buy_server():
     global cps_update, cost_server, codes, server
     if codes >= cost_server and server < 19:
@@ -111,7 +108,7 @@ def buy_server():
                     f'Server: Max'
             )
 
-# função atualizar label principal
+# update main label function
 def update_label():
     global codes, cps, codes_per_click
     label_qnt_code.config(
@@ -120,7 +117,7 @@ def update_label():
             f'CPS: {(cps*codes_per_click):,}'
     )
 
-# Criar label qnt cookies
+# Create label quantity codes
 label_qnt_code = tk.Label(
     window,
     text=
@@ -132,7 +129,7 @@ label_qnt_code = tk.Label(
 )
 label_qnt_code.grid(row=1, column=1, pady=25)
 
-#criar botão codar
+# create code button
 image_main_button = tk.PhotoImage(file='_internal/assets/main_button.png')
 resized_image_main_button = image_main_button.subsample(3, 3)
 main_button = tk.Button(
@@ -146,7 +143,7 @@ main_button = tk.Button(
 )
 main_button.grid(row = 4, column = 1, padx=100)
 
-# criar botão RTFM
+# create RTFM button
 image_RTFM = tk.PhotoImage(file='_internal/assets/RTFM.png')
 resized_image_RTFM = image_RTFM.subsample(7, 7)
 button_RTFM = tk.Button(
@@ -160,7 +157,7 @@ button_RTFM = tk.Button(
 )
 button_RTFM.grid(row=1, column=2, pady=25)
 
-# Criar label qnt RTFM
+# Create RTFM quantity label
 label_qnt_RTFM = tk.Label(
     window,
     text=
@@ -172,7 +169,7 @@ label_qnt_RTFM = tk.Label(
 )
 label_qnt_RTFM.grid(row=1, column=3, pady=25)
 
-# criar botão robô
+# create robot button
 image_robot = tk.PhotoImage(file='_internal/assets/robot.png')
 resized_image_robot = image_robot.subsample(4, 4)
 button_robot = tk.Button(
@@ -185,7 +182,7 @@ button_robot = tk.Button(
     activebackground='#292b38'
 )
 
-# criar label qnt CPS robôs
+# create label quantity CPS robots
 label_qnt_CPS = tk.Label(
     window,
     text=
@@ -196,7 +193,7 @@ label_qnt_CPS = tk.Label(
     background='#292b38'
 )
 
-# criar botão servidor
+# create server button
 image_server = tk.PhotoImage(file='_internal/assets/server.png')
 resized_image_server = image_server.subsample(7, 7)
 button_server = tk.Button(
@@ -209,7 +206,7 @@ button_server = tk.Button(
     activebackground='#292b38'
 )
 
-# criar label botão servidor
+# create server button label
 label_qnt_server = tk.Label(
     window,
     text=
@@ -220,6 +217,6 @@ label_qnt_server = tk.Label(
     background='#292b38'
 )
 
-# Inicializa
+# Initializes
 update()
 window.mainloop()
